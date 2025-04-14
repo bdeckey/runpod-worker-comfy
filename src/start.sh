@@ -7,7 +7,7 @@ export LD_PRELOAD="${TCMALLOC}"
 # --- UPDATED: Define the path on the network volume for custom nodes ---
 # This path should contain the cloned/copied custom node folders
 # (e.g., /workspace/custom_nodes/ComfyUI-Manager, /workspace/custom_nodes/was-node-suite, etc.)
-EXTRA_NODE_PATH_ON_VOLUME="/workspace/custom_nodes" # Changed to user's specified path
+EXTRA_NODE_PATH_ON_VOLUME="/runpod-volume/custom_nodes" # Changed to user's specified path
 
 # --- MODIFIED: Construct base arguments for ComfyUI ---
 # We add --extra-node-paths here so it applies in both cases below
