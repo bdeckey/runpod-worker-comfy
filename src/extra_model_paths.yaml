@@ -1,16 +1,26 @@
 runpod_worker_comfy:
   base_path: /runpod-volume
-  checkpoints: models/checkpoints/
-  clip: models/clip/
-  clip_vision: models/clip_vision/
-  configs: models/configs/
-  controlnet: models/controlnet/
-  embeddings: models/embeddings/
-  loras: models/loras/
-  upscale_models: models/upscale_models/
-  vae: models/vae/
-  unet: models/unet/
-  LLM: models/LLM/
-  ella: models/ella/
-  Joy_caption: models/Joy_caption/
-  # custom_nodes: custom_nodes/
+  blip: Start/ComfyUI/models/blip/
+  checkpoints: Start/ComfyUI/models/checkpoints/
+  clip: Start/ComfyUI/models/clip/
+  clip_vision: Start/ComfyUI/models/clip_vision/
+  configs: Start/ComfyUI/models/configs/
+  controlnet: Start/ComfyUI/models/controlnet/
+  diffusers: Start/ComfyUI/models/diffusers/
+  diffusion_models: Start/ComfyUI/models/diffusion_models/
+  insightface: Start/ComfyUI/models/insightface/
+  instantid: Start/ComfyUI/models/instantid/
+  text_encoders: Start/ComfyUI/models/text_encoders/
+  embeddings: Start/ComfyUI/models/embeddings/
+  loras: Start/ComfyUI/models/loras/
+  pulid: Start/ComfyUI/models/pulid/
+  facexlib: Start/ComfyUI/models/facexlib/
+  upscale_models: Start/ComfyUI/models/upscale_models/
+  vae: Start/ComfyUI/models/vae/
+  unet: Start/ComfyUI/models/unet/
+  LLM: Start/ComfyUI/models/LLM/
+  ella: Start/ComfyUI/models/ella/
+  Joy_caption: Start/ComfyUI/models/Joy_caption/
+
+
+  

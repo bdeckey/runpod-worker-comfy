@@ -4,8 +4,10 @@
 TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
 export LD_PRELOAD="${TCMALLOC}"
 
+
+
 # --- Define the PARENT path ON THE VOLUME where custom node folders live ---
-SOURCE_PARENT_DIR="/runpod-volume/custom_nodes"
+SOURCE_PARENT_DIR="/runpod-volume/Start/ComfyUI/custom_nodes"
 
 # --- Define the PARENT path INSIDE the container where links should be created ---
 TARGET_PARENT_DIR="/comfyui/custom_nodes"

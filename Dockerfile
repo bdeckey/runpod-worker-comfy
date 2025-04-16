@@ -18,7 +18,6 @@ RUN apt-get update && apt-get install -y \
     wget \
     libgl1 \
     libglib2.0-0 \
-    ffmpeg \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
 
@@ -29,7 +28,7 @@ RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 RUN pip install comfy-cli
 
 # Install ComfyUI
-RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia --version 0.3.26
+RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia --version 0.3.15
 # RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia
 
 
@@ -40,13 +39,17 @@ WORKDIR /comfyui
 RUN pip install \
     opencv-contrib-python \
     facexlib \
-    insightface \
+    insightface==0.7.3 \
     numba \
     onnxruntime \
-    blend_modes \ 
-    onnxruntime-gpu; sys_platform != 'darwin' and (platform_machine == 'x86_64' or platform_machine == 'AMD64')
-    
-
+    blend_modes \
+    segment_anything \
+    timm \
+    ftfy \
+    wget \
+    peft \
+    bitsandbytes \
+    color_matcher
 
 # Install runpod
 RUN pip install runpod requests
