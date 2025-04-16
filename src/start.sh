@@ -4,7 +4,23 @@
 TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
 export LD_PRELOAD="${TCMALLOC}"
 
+# Run this in your startup script AFTER the models YAML should have been loaded
+# Define source on volume
+SOURCE_JOYCAPTION_MODEL_DIR="/runpod-volume/Start/ComfyUI/models/Joy_caption/cgrkzexw-599808"
+# Define target in default location
+TARGET_JOYCAPTION_PARENT_DIR="/comfyui/models/Joy_caption"
+TARGET_JOYCAPTION_MODEL_DIR="$TARGET_JOYCAPTION_PARENT_DIR/cgrkzexw-599808"
 
+# Ensure parent target directory exists
+mkdir -p "$TARGET_JOYCAPTION_PARENT_DIR"
+
+# Create the symlink if the source exists
+if [ -d "$SOURCE_JOYCAPTION_MODEL_DIR" ]; then
+  ln -sf "$SOURCE_JOYCAPTION_MODEL_DIR" "$TARGET_JOYCAPTION_MODEL_DIR"
+  echo "runpod-worker-comfy: Created WORKAROUND symlink for JoyCaption model: $TARGET_JOYCAPTION_MODEL_DIR -> $SOURCE_JOYCAPTION_MODEL_DIR"
+else
+  echo "runpod-worker-comfy: Warning - Source JoyCaption model dir not found for workaround symlink: $SOURCE_JOYCAPTION_MODEL_DIR"
+fi
 
 # --- Define the PARENT path ON THE VOLUME where custom node folders live ---
 SOURCE_PARENT_DIR="/runpod-volume/Start/ComfyUI/custom_nodes"
