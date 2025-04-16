@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
     git \
     wget \
     libgl1 \
+    libglib2.0-0 \
+    ffmpeg \
     && ln -sf /usr/bin/python3.10 /usr/bin/python \
     && ln -sf /usr/bin/pip3 /usr/bin/pip
 
@@ -27,12 +29,24 @@ RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 RUN pip install comfy-cli
 
 # Install ComfyUI
-# RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia --version 0.3.26
-RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia
+RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia --version 0.3.26
+# RUN /usr/bin/yes | comfy --workspace /comfyui install --cuda-version 11.8 --nvidia
 
 
 # Change working directory to ComfyUI
 WORKDIR /comfyui
+
+# Install requirements for custom nodes
+RUN pip install \
+    opencv-contrib-python \
+    facexlib \
+    insightface \
+    numba \
+    onnxruntime \
+    blend_modes \ 
+    onnxruntime-gpu; sys_platform != 'darwin' and (platform_machine == 'x86_64' or platform_machine == 'AMD64')
+    
+
 
 # Install runpod
 RUN pip install runpod requests
@@ -48,10 +62,10 @@ ADD src/start.sh src/restore_snapshot.sh src/rp_handler.py test_input.json ./
 RUN chmod +x /start.sh /restore_snapshot.sh
 
 # Optionally copy the snapshot file
-ADD *snapshot*.json /
+# ADD *snapshot*.json /
 
 # Restore the snapshot to install custom nodes
-RUN /restore_snapshot.sh
+# RUN /restore_snapshot.sh
 
 # Start container
 CMD ["/start.sh"]
